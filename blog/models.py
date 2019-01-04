@@ -27,6 +27,9 @@ class Post(models.Model):
             self.slug = gen_slug(self.title)
         super().save(*args, **kwargs)
 
+    def get_delete_url(self):
+        return reverse('post_delete_url', kwargs={'slug': self.slug})
+
     def __str__(self):
         return self.title
 
@@ -39,6 +42,9 @@ class Tag(models.Model):
 
     def get_update_url(self):
         return reverse('tag_update_url', kwargs={'slug': self.slug})
+
+    def get_delete_url(self):
+        return reverse('tag_delete_url', kwargs={'slug': self.slug})
 
     def __str__(self):
         return '{}'.format(self.title)
